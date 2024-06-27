@@ -1,0 +1,23 @@
+{
+  "VALIDATION_ERROR": {
+    "statusCode": 400,
+    "message": "Validation error",
+    "key": "VALIDATION_ERROR"
+  },
+
+  "OPERATION_FAILED": {
+    "statusCode": 500,
+    "message": "Failed to perform operation",
+    "key": "OPERATION_FAILED"
+  },
+  "ITEM_EXISTS": {
+    "statusCode": 400,
+    "message": "An item with the same name already exists",
+    "key": "ITEM_EXISTS"
+  },
+  "ITEM_NOT_FOUND": {
+    "statusCode": 400,
+    "message": "Item not found",
+    "key": "ITEM_NOT_FOUND"
+  }
+}
