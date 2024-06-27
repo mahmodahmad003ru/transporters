@@ -1,11 +1,11 @@
-# Instructions for Setting Up the Todo Application
+# Instructions for Setting Up the Transporters Application
 
 ## Step 1: Clone the Repository
 
 First, clone the repository to your local machine using Git:
 
 ```
-git clone https://github.com/mahmodahmad003sy/todo.git
+git clone https://github.com/mahmodahmad003ru/transporters.git
 ```
 
 ## Step 2: Navigate to the Project Directory
@@ -13,7 +13,7 @@ git clone https://github.com/mahmodahmad003sy/todo.git
 Change your current directory to the cloned repository:
 
 ```
-cd todo
+cd transporters
 ```
 
 ## Step 3: Install Dependencies
@@ -26,16 +26,17 @@ yarn
 
 ## Step 4: Create an Environment File
 
-Create a `.env` file in the root of your project directory and add the following environment variables. Replace the placeholder values with your actual database credentials and desired port number if different.
+Create environment file (`.env.development` for `start:dev` script, `.env.production` for `start:prod` script) file in the root of your project directory and add the following environment variables. Replace the placeholder values with your actual database credentials and desired port number if different.
 
 ```plaintext
 NODE_ENV=development
 DB_HOST=localhost
 DB_PORT=5432
-DB_USER=todo
-DB_PASSWORD=todo
-DB_NAME=todo
+DB_USER=transporters
+DB_PASSWORD=transporters
+DB_NAME=transporters
 PORT=3000
+LOG_TO_FILE=true
 ```
 
 ## Step 5: Start the Development Server

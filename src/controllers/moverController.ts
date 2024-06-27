@@ -7,6 +7,7 @@ import { CustomError } from "../middleware/CustomError";
 import { CreateMoverDto, UpdateMoverDto, LoadItemsDto } from "../dto/MoverDto";
 import { QuestState } from "../enum/QuestState";
 import { In } from "typeorm";
+import actionsLogger from "../utils/actionsLogger";
 
 export const createMover = async (
   req: Request,
@@ -131,6 +132,13 @@ export const loadMover = async (
   mover.questState = QuestState.LOADING;
   await mover.save();
 
+  //the looger message
+  actionsLogger.info(
+    `Mover with ID ${mover.id} loaded with items: ${loadItemsDto.itemIds.join(
+      ", "
+    )}`
+  );
+
   res.status(200).json({ success: true, mover });
 };
 
@@ -173,6 +181,11 @@ export const endMission = async (
   mover.items = [];
   mover.missionsCompleted += 1;
   await mover.save();
+
+  //the looger message
+  actionsLogger.info(
+    `Mover with ID ${mover.id} has completed the mission and unloaded all items`
+  );
 
   res.status(200).json({ success: true, mover });
 };

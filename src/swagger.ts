@@ -6,7 +6,7 @@ import path from "path";
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "Todo API",
+    title: "Magic Transporters API",
     version: "1.0.0",
     description: "API for Magic transporter application",
   },

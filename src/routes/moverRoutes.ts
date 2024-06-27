@@ -391,7 +391,7 @@ router.post("/:id([0-9]+)/start-mission", asyncHandler(startMission));
  *       500:
  *         description: Some server error
  */
-router.post("/:id([0-9]+)([0-9]+)/end-mission", asyncHandler(endMission));
+router.post("/:id([0-9]+)/end-mission", asyncHandler(endMission));
 
 /**
  * @swagger
