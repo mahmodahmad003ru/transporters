@@ -1,7 +1,7 @@
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { NextFunction, Request, Response } from "express";
-import { CreateItemDto } from "../dto/ItemDto";
+import { CreateItemDto, UpdateItemDto } from "../dto/ItemDto";
 import { MagicItem } from "../entity/magicItem";
 import { CustomError } from "../middleware/CustomError";
 
@@ -46,6 +46,50 @@ export const getItems = async (
   });
 
   res.json({ success: true, items, total, limit, skip });
+};
+
+export const updateItem = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id, 10);
+  const itemDto = plainToInstance(UpdateItemDto, req.body);
+  const errors = await validate(itemDto);
+
+  if (errors.length > 0) {
+    const errorMessages = errors
+      .map((error) => Object.values(error.constraints!))
+      .flat()
+      .join(". ");
+    return next(new CustomError(400, "VALIDATION_ERROR", errorMessages));
+  }
+
+  const item = await MagicItem.findOne({ where: { id } });
+
+  if (!item) {
+    throw new CustomError(404, "ITEM_NOT_FOUND");
+  }
+
+  if (itemDto.name) {
+    const existingItem = await MagicItem.findOne({
+      where: { name: itemDto.name },
+    });
+    if (existingItem && existingItem.id !== id) {
+      return next(
+        new CustomError(
+          400,
+          "NAME_EXISTS",
+          "An item with the same name already exists"
+        )
+      );
+    }
+  }
+
+  Object.assign(item, itemDto);
+  await item.save();
+
+  res.status(200).json({ success: true, item });
 };
 
 export const getItemById = async (

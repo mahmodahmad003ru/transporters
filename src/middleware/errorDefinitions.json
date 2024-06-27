@@ -16,8 +16,33 @@
     "key": "ITEM_EXISTS"
   },
   "ITEM_NOT_FOUND": {
-    "statusCode": 400,
+    "statusCode": 404,
     "message": "Item not found",
     "key": "ITEM_NOT_FOUND"
+  },
+  "MOVER_NOT_FOUND": {
+    "statusCode": 404,
+    "message": "Mover not found",
+    "key": "MOVER_NOT_FOUND"
+  },
+  "MOVER_EXISTS": {
+    "statusCode": 400,
+    "message": "An Mover with the same name already exists",
+    "key": "MOVER_EXISTS"
+  },
+  "WEIGHT_LIMIT_EXCEEDED": {
+    "statusCode": 400,
+    "message": "Weight limit exceeded for this Mover",
+    "key": "WEIGHT_LIMIT_EXCEEDED"
+  },
+  "ITEMS_NOT_FOUND": {
+    "statusCode": 404,
+    "message": "One or more items were not found",
+    "key": "ITEMS_NOT_FOUND"
+  },
+  "MOVER_ON_MISSION": {
+    "statusCode": 400,
+    "message": "Cannot load items while mover is on a mission",
+    "key": "MOVER_ON_MISSION"
   }
 }

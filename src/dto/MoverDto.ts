@@ -1,7 +1,22 @@
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from "class-validator";
+import {
+  ArrayNotEmpty,
+  ArrayUnique,
+  IsArray,
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from "class-validator";
 import { QuestState } from "../enum/QuestState";
 
 export class CreateMoverDto {
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 255)
+  name!: string;
+
   @IsNotEmpty()
   @IsInt()
   weightLimit!: number;
@@ -17,6 +32,11 @@ export class CreateMoverDto {
 
 export class UpdateMoverDto {
   @IsOptional()
+  @IsString()
+  @Length(1, 255)
+  name?: string;
+
+  @IsOptional()
   @IsInt()
   weightLimit?: number;
 
@@ -29,8 +49,10 @@ export class UpdateMoverDto {
   questState?: QuestState;
 }
 
-export class LoadItemDto {
-  @IsNotEmpty()
-  @IsInt()
-  itemId!: number;
+export class LoadItemsDto {
+  @IsArray()
+  @ArrayNotEmpty()
+  @ArrayUnique()
+  @IsInt({ each: true })
+  itemIds!: number[];
 }

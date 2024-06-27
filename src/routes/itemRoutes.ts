@@ -4,6 +4,7 @@ import {
   deleteItem,
   getItemById,
   getItems,
+  updateItem,
 } from "../controllers/itemController";
 import { asyncHandler } from "../middleware/asyncHandler";
 
@@ -36,6 +37,15 @@ const router = Router();
  *           type: string
  *           format: date-time
  *           description: The date the item was last updated
+ *     UpdateItemDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the item
+ *         weight:
+ *           type: number
+ *           description: The weight of the item
  */
 
 /**
@@ -141,7 +151,40 @@ router.get("/", asyncHandler(getItems));
  *         description: Some server error
  */
 router.get("/:id", asyncHandler(getItemById));
-
+/**
+ * @swagger
+ * /items/{id}:
+ *   put:
+ *     summary: Update an item by ID
+ *     tags: [Items]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The item ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateItemDto'
+ *     responses:
+ *       200:
+ *         description: The item was successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MagicItem'
+ *       400:
+ *         description: Validation error
+ *       404:
+ *         description: Item not found
+ *       500:
+ *         description: Some server error
+ */
+router.put("/:id", asyncHandler(updateItem));
 /**
  * @swagger
  * /items/{id}:
